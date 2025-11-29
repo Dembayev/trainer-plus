@@ -1,0 +1,294 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #2563eb;
+  /* Safe area for mobile */
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+body {
+  background-color: theme(colors.gray.50);
+  color: theme(colors.gray.900);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent zoom on input focus (iOS) */
+input, select, textarea {
+  font-size: 16px;
+}
+
+/* Safe area padding for bottom nav */
+.safe-area-bottom {
+  padding-bottom: var(--safe-area-inset-bottom);
+}
+
+/* Pull to refresh indicator */
+.ptr-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, theme(colors.blue.500), theme(colors.blue.600));
+  animation: loading 1s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: theme(borderRadius.md);
+  font-size: theme(fontSize.sm);
+  font-weight: 500;
+  transition-property: all;
+  transition-duration: 150ms;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px theme(colors.blue.500);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: theme(colors.blue.600);
+  color: white;
+  height: 2.75rem;
+  padding: 0.5rem 1rem;
+}
+
+.btn-primary:hover {
+  background-color: theme(colors.blue.700);
+}
+
+.btn-secondary {
+  background-color: theme(colors.gray.100);
+  color: theme(colors.gray.900);
+  height: 2.75rem;
+  padding: 0.5rem 1rem;
+}
+
+.btn-secondary:hover {
+  background-color: theme(colors.gray.200);
+}
+
+.btn-outline {
+  border: 1px solid theme(colors.gray.300);
+  height: 2.75rem;
+  padding: 0.5rem 1rem;
+}
+
+.btn-outline:hover {
+  background-color: theme(colors.gray.100);
+}
+
+.btn-ghost {
+  height: 2.75rem;
+  padding: 0.5rem 1rem;
+}
+
+.btn-ghost:hover {
+  background-color: theme(colors.gray.100);
+}
+
+.btn-destructive {
+  background-color: theme(colors.red.600);
+  color: white;
+  height: 2.75rem;
+  padding: 0.5rem 1rem;
+}
+
+.btn-destructive:hover {
+  background-color: theme(colors.red.700);
+}
+
+/* Large button for mobile */
+.btn-lg {
+  height: 3.5rem;
+  font-size: theme(fontSize.base);
+  padding: 0.75rem 1.5rem;
+}
+
+/* Inputs */
+.input {
+  display: flex;
+  height: 2.75rem;
+  width: 100%;
+  border-radius: theme(borderRadius.md);
+  border: 1px solid theme(colors.gray.300);
+  background-color: white;
+  padding: 0.5rem 0.75rem;
+  font-size: 16px; /* Prevents zoom on iOS */
+}
+
+.input::placeholder {
+  color: theme(colors.gray.400);
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px theme(colors.blue.500);
+  border-color: transparent;
+}
+
+.input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.label {
+  font-size: theme(fontSize.sm);
+  font-weight: 500;
+  color: theme(colors.gray.700);
+}
+
+/* Cards */
+.card {
+  border-radius: theme(borderRadius.lg);
+  border: 1px solid theme(colors.gray.200);
+  background-color: white;
+  box-shadow: theme(boxShadow.sm);
+}
+
+/* Mobile touch improvements */
+@media (max-width: 768px) {
+  .card {
+    border-radius: theme(borderRadius.xl);
+  }
+  
+  /* Larger touch targets */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Smooth scrolling */
+  .overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.text-primary {
+  color: theme(colors.blue.600);
+}
+
+/* Status badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: theme(borderRadius.full);
+  font-size: theme(fontSize.xs);
+  font-weight: 500;
+}
+
+.badge-green {
+  background-color: theme(colors.green.100);
+  color: theme(colors.green.700);
+}
+
+.badge-yellow {
+  background-color: theme(colors.yellow.100);
+  color: theme(colors.yellow.700);
+}
+
+.badge-red {
+  background-color: theme(colors.red.100);
+  color: theme(colors.red.700);
+}
+
+.badge-gray {
+  background-color: theme(colors.gray.100);
+  color: theme(colors.gray.600);
+}
+
+/* Attendance buttons */
+.attendance-btn {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.attendance-btn:active {
+  transform: scale(0.9);
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    theme(colors.gray.200) 0%,
+    theme(colors.gray.100) 50%,
+    theme(colors.gray.200) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton 1.5s ease-in-out infinite;
+  border-radius: theme(borderRadius.md);
+}
+
+@keyframes skeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Toast notifications */
+.toast {
+  position: fixed;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: theme(colors.gray.900);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: theme(borderRadius.lg);
+  box-shadow: theme(boxShadow.lg);
+  z-index: 100;
+  animation: toast-in 0.3s ease-out;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: theme(colors.gray.500);
+}
+
+.empty-state-icon {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1rem;
+  color: theme(colors.gray.300);
+}

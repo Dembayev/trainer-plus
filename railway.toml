@@ -1,0 +1,21 @@
+# Railway configuration
+[build]
+  builder = "dockerfile"
+  dockerfilePath = "Dockerfile.prod"
+
+[deploy]
+  healthcheckPath = "/health"
+  healthcheckTimeout = 100
+  restartPolicyType = "on_failure"
+  restartPolicyMaxRetries = 3
+
+[[services]]
+  protocol = "http"
+  port = 8080
+
+[env]
+  # Set these in Railway dashboard
+  # DATABASE_URL = "postgresql://..."
+  # JWT_SECRET = "..."
+  # STRIPE_SECRET_KEY = "..."
+  # STRIPE_WEBHOOK_SECRET = "..."
