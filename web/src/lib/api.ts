@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_BASE_URL = '/api/v1';
+const API_BASE_URL = import.meta.env.VITE_API_URL 
+  ? `${import.meta.env.VITE_API_URL}/api/v1`
+  : '/api/v1';
 
 // Create axios instance
 export const api = axios.create({
@@ -287,9 +289,9 @@ export const publicApi = {
       club: Club;
       groups: Group[];
       sessions: (Session & { group_title: string })[];
-    }>>(`/public/club/${clubId}/schedule`, { params: { from, to } }),
+    }>>(`${API_BASE_URL.replace('/api/v1', '')}/public/club/${clubId}/schedule`, { params: { from, to } }),
   getGroups: (clubId: string) =>
-    axios.get<ApiResponse<Group[]>>(`/public/club/${clubId}/groups`),
+    axios.get<ApiResponse<Group[]>>(`${API_BASE_URL.replace('/api/v1', '')}/public/club/${clubId}/groups`),
 };
 
 export default api;
