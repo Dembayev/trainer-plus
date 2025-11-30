@@ -81,6 +81,12 @@ api.interceptors.response.use(
 
 // API Types
 export interface User {
+  phone?: string;
+  city?: string;
+  bio?: string;
+  company?: string;
+  website?: string;
+  avatar?: string;
   id: string;
   email: string;
   name: string;

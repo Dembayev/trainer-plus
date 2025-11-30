@@ -63,7 +63,7 @@ export default function DashboardPage() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <span className="hidden sm:block text-gray-400">{user?.name}</span>
+              <Link to="/profile" className="hidden sm:block text-gray-400 hover:text-white transition-colors">{user?.name}</Link>
               <button onClick={handleLogout} className="text-gray-400 hover:text-white"><LogOut className="w-5 h-5" /></button>
               <button className="md:hidden p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>{mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}</button>
             </div>
