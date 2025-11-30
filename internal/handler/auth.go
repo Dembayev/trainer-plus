@@ -108,3 +108,36 @@ func (h *AuthHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 	response.OK(w, user)
 }
+
+func (h *AuthHandler) UpdateProfile(w http.ResponseWriter, r *http.Request) {
+	userID := middleware.GetUserID(r.Context())
+
+	var input struct {
+		Name    string `json:"name"`
+		Phone   string `json:"phone"`
+		City    string `json:"city"`
+		Bio     string `json:"bio"`
+		Company string `json:"company"`
+		Website string `json:"website"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
+		response.BadRequest(w, "invalid request body")
+		return
+	}
+
+	user, err := h.authService.UpdateProfile(r.Context(), userID, service.UpdateProfileInput{
+		Name:    input.Name,
+		Phone:   input.Phone,
+		City:    input.City,
+		Bio:     input.Bio,
+		Company: input.Company,
+		Website: input.Website,
+	})
+	if err != nil {
+		response.InternalError(w, "failed to update profile")
+		return
+	}
+
+	response.OK(w, user)
+}

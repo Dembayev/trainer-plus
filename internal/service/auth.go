@@ -123,3 +123,34 @@ func (s *AuthService) RefreshToken(ctx context.Context, refreshToken string) (*j
 func (s *AuthService) GetUser(ctx context.Context, userID uuid.UUID) (*model.User, error) {
 	return s.userRepo.GetByID(ctx, userID)
 }
+
+type UpdateProfileInput struct {
+	Name    string
+	Phone   string
+	City    string
+	Bio     string
+	Company string
+	Website string
+}
+
+func (s *AuthService) UpdateProfile(ctx context.Context, userID uuid.UUID, input UpdateProfileInput) (*model.User, error) {
+	user, err := s.userRepo.GetByID(ctx, userID)
+	if err != nil {
+		return nil, err
+	}
+
+	if input.Name != "" {
+		user.Name = input.Name
+	}
+	user.Phone = input.Phone
+	user.City = input.City
+	user.Bio = input.Bio
+	user.Company = input.Company
+	user.Website = input.Website
+
+	if err := s.userRepo.UpdateProfile(ctx, user); err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}

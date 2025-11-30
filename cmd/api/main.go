@@ -117,6 +117,7 @@ func main() {
 
 			// Auth
 			r.Get("/auth/me", authHandler.Me)
+			r.Put("/users/me", authHandler.UpdateProfile)
 
 			// Clubs
 			r.Route("/clubs", func(r chi.Router) {

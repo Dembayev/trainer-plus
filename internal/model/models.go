@@ -7,6 +7,12 @@ import (
 )
 
 type User struct {
+	Phone   string     `db:"phone" json:"phone,omitempty"`
+	City    string     `db:"city" json:"city,omitempty"`
+	Bio     string     `db:"bio" json:"bio,omitempty"`
+	Company string     `db:"company" json:"company,omitempty"`
+	Website string     `db:"website" json:"website,omitempty"`
+	Avatar  string     `db:"avatar" json:"avatar,omitempty"`
 	ID           uuid.UUID  `db:"id" json:"id"`
 	Email        string     `db:"email" json:"email"`
 	PasswordHash string     `db:"password_hash" json:"-"`

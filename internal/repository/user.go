@@ -94,3 +94,29 @@ func (r *UserRepository) EmailExists(ctx context.Context, email string) (bool, e
 	err := r.db.GetContext(ctx, &exists, query, email)
 	return exists, err
 }
+
+func (r *UserRepository) UpdateProfile(ctx context.Context, user *model.User) error {
+	query := `
+		UPDATE users 
+		SET name = $2, phone = $3, city = $4, bio = $5, company = $6, website = $7
+		WHERE id = $1`
+
+	result, err := r.db.ExecContext(ctx, query,
+		user.ID,
+		user.Name,
+		user.Phone,
+		user.City,
+		user.Bio,
+		user.Company,
+		user.Website,
+	)
+	if err != nil {
+		return err
+	}
+
+	rows, _ := result.RowsAffected()
+	if rows == 0 {
+		return ErrNotFound
+	}
+	return nil
+}
