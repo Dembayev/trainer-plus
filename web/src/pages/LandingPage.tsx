@@ -1,10 +1,18 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Users, Calendar, CreditCard, BarChart3, Check, ChevronRight, Star, Zap, Shield, Smartphone, Play, ArrowRight, Menu, X } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function LandingPage() {
+  const { user } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    setMobileMenuOpen(false);
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
@@ -19,13 +27,21 @@ export default function LandingPage() {
               <span className="text-xl font-bold">Тренер+</span>
             </div>
             <div className="hidden md:flex items-center gap-8">
-              <a href="#features" className="text-gray-400 hover:text-white transition-colors">Возможности</a>
-              <a href="#pricing" className="text-gray-400 hover:text-white transition-colors">Тарифы</a>
-              <a href="#testimonials" className="text-gray-400 hover:text-white transition-colors">Отзывы</a>
-              <Link to="/login" className="text-gray-400 hover:text-white transition-colors">Войти</Link>
-              <Link to="/signup" className="bg-gradient-to-r from-orange-500 to-red-600 px-5 py-2.5 rounded-full font-semibold hover:shadow-lg hover:shadow-orange-500/25 transition-all">
-                Начать бесплатно
-              </Link>
+              <button onClick={() => scrollTo('features')} className="text-gray-400 hover:text-white transition-colors">Возможности</button>
+              <button onClick={() => scrollTo('pricing')} className="text-gray-400 hover:text-white transition-colors">Тарифы</button>
+              <button onClick={() => scrollTo('testimonials')} className="text-gray-400 hover:text-white transition-colors">Отзывы</button>
+              {user ? (
+                <Link to="/dashboard" className="bg-gradient-to-r from-orange-500 to-red-600 px-5 py-2.5 rounded-full font-semibold hover:shadow-lg hover:shadow-orange-500/25 transition-all">
+                  Перейти в кабинет
+                </Link>
+              ) : (
+                <>
+                  <Link to="/login" className="text-gray-400 hover:text-white transition-colors">Войти</Link>
+                  <Link to="/signup" className="bg-gradient-to-r from-orange-500 to-red-600 px-5 py-2.5 rounded-full font-semibold hover:shadow-lg hover:shadow-orange-500/25 transition-all">
+                    Начать бесплатно
+                  </Link>
+                </>
+              )}
             </div>
             <button className="md:hidden p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -34,12 +50,21 @@ export default function LandingPage() {
         </div>
         {mobileMenuOpen && (
           <div className="md:hidden bg-[#0a0a0a] border-t border-white/10 px-4 py-6 space-y-4">
-            <a href="#features" className="block text-gray-400 hover:text-white">Возможности</a>
-            <a href="#pricing" className="block text-gray-400 hover:text-white">Тарифы</a>
-            <Link to="/login" className="block text-gray-400 hover:text-white">Войти</Link>
-            <Link to="/signup" className="block bg-gradient-to-r from-orange-500 to-red-600 px-5 py-3 rounded-full font-semibold text-center">
-              Начать бесплатно
-            </Link>
+            <button onClick={() => scrollTo('features')} className="block w-full text-left text-gray-400 hover:text-white">Возможности</button>
+            <button onClick={() => scrollTo('pricing')} className="block w-full text-left text-gray-400 hover:text-white">Тарифы</button>
+            <button onClick={() => scrollTo('testimonials')} className="block w-full text-left text-gray-400 hover:text-white">Отзывы</button>
+            {user ? (
+              <Link to="/dashboard" className="block bg-gradient-to-r from-orange-500 to-red-600 px-5 py-3 rounded-full font-semibold text-center">
+                Перейти в кабинет
+              </Link>
+            ) : (
+              <>
+                <Link to="/login" className="block text-gray-400 hover:text-white">Войти</Link>
+                <Link to="/signup" className="block bg-gradient-to-r from-orange-500 to-red-600 px-5 py-3 rounded-full font-semibold text-center">
+                  Начать бесплатно
+                </Link>
+              </>
+            )}
           </div>
         )}
       </nav>
@@ -69,13 +94,20 @@ export default function LandingPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <Link to="/signup" className="group bg-gradient-to-r from-orange-500 to-red-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-orange-500/25 transition-all flex items-center gap-2">
-              Начать бесплатно
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <button className="flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-gray-300 hover:text-white border border-white/20 hover:border-white/40 transition-all">
+            {user ? (
+              <Link to="/dashboard" className="group bg-gradient-to-r from-orange-500 to-red-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-orange-500/25 transition-all flex items-center gap-2">
+                Перейти в кабинет
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            ) : (
+              <Link to="/signup" className="group bg-gradient-to-r from-orange-500 to-red-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-orange-500/25 transition-all flex items-center gap-2">
+                Начать бесплатно
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            )}
+            <button onClick={() => scrollTo('features')} className="flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-gray-300 hover:text-white border border-white/20 hover:border-white/40 transition-all">
               <Play className="w-5 h-5" />
-              Смотреть демо
+              Узнать больше
             </button>
           </div>
 
@@ -97,7 +129,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-24 relative">
+      <section id="features" className="py-24 relative scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-bold mb-4">
@@ -159,7 +191,7 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-24 relative">
+      <section id="pricing" className="py-24 relative scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-bold mb-4">
@@ -185,8 +217,8 @@ export default function LandingPage() {
                 <li className="flex items-center gap-3"><Check className="w-5 h-5 text-green-500" /><span className="text-gray-300">1 группа</span></li>
                 <li className="flex items-center gap-3"><Check className="w-5 h-5 text-green-500" /><span className="text-gray-300">Базовая аналитика</span></li>
               </ul>
-              <Link to="/signup" className="block w-full py-3 text-center rounded-full border border-white/20 font-semibold hover:bg-white/5 transition-all">
-                Начать бесплатно
+              <Link to={user ? "/dashboard" : "/signup"} className="block w-full py-3 text-center rounded-full border border-white/20 font-semibold hover:bg-white/5 transition-all">
+                {user ? 'Перейти в кабинет' : 'Начать бесплатно'}
               </Link>
             </div>
 
@@ -201,8 +233,8 @@ export default function LandingPage() {
                 <li className="flex items-center gap-3"><Check className="w-5 h-5 text-orange-500" /><span className="text-gray-300">Онлайн-оплаты</span></li>
                 <li className="flex items-center gap-3"><Check className="w-5 h-5 text-orange-500" /><span className="text-gray-300">Расширенная аналитика</span></li>
               </ul>
-              <Link to="/signup" className="block w-full py-3 text-center rounded-full bg-gradient-to-r from-orange-500 to-red-600 font-semibold hover:shadow-lg hover:shadow-orange-500/25 transition-all">
-                Начать 14-дневный триал
+              <Link to={user ? "/dashboard" : "/signup"} className="block w-full py-3 text-center rounded-full bg-gradient-to-r from-orange-500 to-red-600 font-semibold hover:shadow-lg hover:shadow-orange-500/25 transition-all">
+                {user ? 'Перейти в кабинет' : 'Начать 14-дневный триал'}
               </Link>
             </div>
 
@@ -215,7 +247,7 @@ export default function LandingPage() {
                 <li className="flex items-center gap-3"><Check className="w-5 h-5 text-purple-500" /><span className="text-gray-300">Несколько филиалов</span></li>
                 <li className="flex items-center gap-3"><Check className="w-5 h-5 text-purple-500" /><span className="text-gray-300">API доступ</span></li>
               </ul>
-              <Link to="/signup" className="block w-full py-3 text-center rounded-full border border-white/20 font-semibold hover:bg-white/5 transition-all">
+              <Link to={user ? "/dashboard" : "/signup"} className="block w-full py-3 text-center rounded-full border border-white/20 font-semibold hover:bg-white/5 transition-all">
                 Связаться с нами
               </Link>
             </div>
@@ -224,7 +256,7 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials */}
-      <section id="testimonials" className="py-24 relative">
+      <section id="testimonials" className="py-24 relative scroll-mt-20">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-600/5 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
@@ -287,10 +319,10 @@ export default function LandingPage() {
             Готовы <span className="bg-gradient-to-r from-orange-400 via-red-500 to-purple-500 bg-clip-text text-transparent">вырасти</span>?
           </h2>
           <p className="text-xl text-gray-400 mb-10">Присоединяйтесь к 500+ тренерам, которые уже используют Тренер+</p>
-          <Link to="/signup" className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-600 px-10 py-5 rounded-full font-bold text-xl hover:shadow-2xl hover:shadow-orange-500/25 transition-all">
-            Начать бесплатно <ChevronRight className="w-6 h-6" />
+          <Link to={user ? "/dashboard" : "/signup"} className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-600 px-10 py-5 rounded-full font-bold text-xl hover:shadow-2xl hover:shadow-orange-500/25 transition-all">
+            {user ? 'Перейти в кабинет' : 'Начать бесплатно'} <ChevronRight className="w-6 h-6" />
           </Link>
-          <p className="text-gray-500 mt-4">Бесплатно навсегда • Без кредитной карты</p>
+          {!user && <p className="text-gray-500 mt-4">Бесплатно навсегда • Без кредитной карты</p>}
         </div>
       </section>
 
