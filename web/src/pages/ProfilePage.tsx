@@ -1,18 +1,16 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { api } from '../lib/api';
-import { Zap, LogOut, Menu, X, User, Mail, Phone, MapPin, Camera, Save, ArrowLeft, Building, Globe } from 'lucide-react';
+import { Zap, LogOut, Menu, X, User, Mail, Phone, MapPin, Save, ArrowLeft, Building, Globe } from 'lucide-react';
 
 export default function ProfilePage() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
-  const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   
   const [form, setForm] = useState({
     name: user?.name || '',
@@ -24,25 +22,6 @@ export default function ProfilePage() {
     website: user?.website || '',
   });
 
-  const handleAvatarClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        setError('Файл слишком большой. Максимум 5MB');
-        return;
-      }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setAvatarPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -50,22 +29,14 @@ export default function ProfilePage() {
     setSuccess('');
     
     try {
-      const formData = new FormData();
-      formData.append('name', form.name);
-      formData.append('phone', form.phone);
-      formData.append('city', form.city);
-      formData.append('bio', form.bio);
-      formData.append('company', form.company);
-      formData.append('website', form.website);
-      
-      if (fileInputRef.current?.files?.[0]) {
-        formData.append('avatar', fileInputRef.current.files[0]);
-      }
-
-      await api.put('/users/me', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
+      await api.put('/users/me', {
+        name: form.name,
+        phone: form.phone,
+        city: form.city,
+        bio: form.bio,
+        company: form.company,
+        website: form.website,
       });
-      
       
       setSuccess('Профиль успешно обновлён!');
       setTimeout(() => setSuccess(''), 3000);
@@ -132,36 +103,16 @@ export default function ProfilePage() {
           <div className="bg-gradient-to-br from-white/5 to-white/0 border border-white/10 rounded-2xl p-6">
             <h2 className="text-xl font-bold mb-6">Фото профиля</h2>
             <div className="flex items-center gap-6">
-              <div 
-                onClick={handleAvatarClick}
-                className="relative w-24 h-24 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center cursor-pointer group overflow-hidden"
-              >
-                {avatarPreview || user?.avatar ? (
-                  <img src={avatarPreview || user?.avatar} alt="Avatar" className="w-full h-full object-cover" />
+              <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center overflow-hidden">
+                {user?.avatar ? (
+                  <img src={user.avatar} alt="Avatar" className="w-full h-full object-cover" />
                 ) : (
                   <span className="text-3xl font-bold">{getInitials(user?.name || 'U')}</span>
                 )}
-                <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Camera className="w-8 h-8" />
-                </div>
               </div>
               <div>
-                <button 
-                  type="button" 
-                  onClick={handleAvatarClick}
-                  className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl font-medium transition-all"
-                >
-                  Загрузить фото
-                </button>
-                <p className="text-gray-500 text-sm mt-2">JPG, PNG. Максимум 5MB</p>
+                <p className="text-gray-500 text-sm">Загрузка фото будет добавлена позже</p>
               </div>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/jpeg,image/png,image/webp"
-                onChange={handleAvatarChange}
-                className="hidden"
-              />
             </div>
           </div>
 
@@ -236,7 +187,7 @@ export default function ProfilePage() {
                     type="text"
                     value={form.company}
                     onChange={(e) => setForm({ ...form, company: e.target.value })}
-                    placeholder="Спортивный клуб 'Чемпион'"
+                    placeholder="Спортивный клуб"
                     className="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-orange-500/50 transition-all"
                   />
                 </div>
@@ -259,7 +210,7 @@ export default function ProfilePage() {
                 <textarea
                   value={form.bio}
                   onChange={(e) => setForm({ ...form, bio: e.target.value })}
-                  placeholder="Расскажите о себе, вашем опыте и специализации..."
+                  placeholder="Расскажите о себе..."
                   rows={4}
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-orange-500/50 transition-all resize-none"
                 />
