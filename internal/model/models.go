@@ -7,17 +7,17 @@ import (
 )
 
 type User struct {
-	Phone   string     `db:"phone" json:"phone,omitempty"`
-	City    string     `db:"city" json:"city,omitempty"`
-	Bio     string     `db:"bio" json:"bio,omitempty"`
-	Company string     `db:"company" json:"company,omitempty"`
-	Website string     `db:"website" json:"website,omitempty"`
-	Avatar  string     `db:"avatar" json:"avatar,omitempty"`
 	ID           uuid.UUID  `db:"id" json:"id"`
 	Email        string     `db:"email" json:"email"`
 	PasswordHash string     `db:"password_hash" json:"-"`
 	Name         string     `db:"name" json:"name"`
 	Role         string     `db:"role" json:"role"`
+	Phone        *string    `db:"phone" json:"phone,omitempty"`
+	City         *string    `db:"city" json:"city,omitempty"`
+	Bio          *string    `db:"bio" json:"bio,omitempty"`
+	Company      *string    `db:"company" json:"company,omitempty"`
+	Website      *string    `db:"website" json:"website,omitempty"`
+	Avatar       *string    `db:"avatar" json:"avatar,omitempty"`
 	CreatedAt    time.Time  `db:"created_at" json:"created_at"`
 	LastLogin    *time.Time `db:"last_login" json:"last_login,omitempty"`
 }
@@ -41,15 +41,15 @@ type Club struct {
 }
 
 type Group struct {
-	ID          uuid.UUID `db:"id" json:"id"`
-	ClubID      uuid.UUID `db:"club_id" json:"club_id"`
-	Title       string    `db:"title" json:"title"`
-	Sport       string    `db:"sport" json:"sport,omitempty"`
-	Capacity    int       `db:"capacity" json:"capacity,omitempty"`
-	Price       float64   `db:"price" json:"price"`
-	Description string    `db:"description" json:"description,omitempty"`
+	ID          uuid.UUID  `db:"id" json:"id"`
+	ClubID      uuid.UUID  `db:"club_id" json:"club_id"`
+	Title       string     `db:"title" json:"title"`
+	Sport       string     `db:"sport" json:"sport,omitempty"`
+	Capacity    int        `db:"capacity" json:"capacity,omitempty"`
+	Price       float64    `db:"price" json:"price"`
+	Description string     `db:"description" json:"description,omitempty"`
 	CoachUserID *uuid.UUID `db:"coach_user_id" json:"coach_user_id,omitempty"`
-	CreatedAt   time.Time `db:"created_at" json:"created_at"`
+	CreatedAt   time.Time  `db:"created_at" json:"created_at"`
 }
 
 type Session struct {

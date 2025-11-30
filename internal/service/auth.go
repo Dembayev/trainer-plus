@@ -41,13 +41,12 @@ type LoginInput struct {
 }
 
 type AuthResponse struct {
-	User         *model.User    `json:"user"`
-	AccessToken  string         `json:"access_token"`
-	RefreshToken string         `json:"refresh_token"`
+	User         *model.User `json:"user"`
+	AccessToken  string      `json:"access_token"`
+	RefreshToken string      `json:"refresh_token"`
 }
 
 func (s *AuthService) Signup(ctx context.Context, input SignupInput) (*AuthResponse, error) {
-	// Check if email exists
 	exists, err := s.userRepo.EmailExists(ctx, input.Email)
 	if err != nil {
 		return nil, err
@@ -56,25 +55,22 @@ func (s *AuthService) Signup(ctx context.Context, input SignupInput) (*AuthRespo
 		return nil, ErrEmailTaken
 	}
 
-	// Hash password
 	hash, err := password.Hash(input.Password)
 	if err != nil {
 		return nil, err
 	}
 
-	// Create user
 	user := &model.User{
 		Email:        input.Email,
 		PasswordHash: hash,
 		Name:         input.Name,
-		Role:         string(model.RoleOwner), // New users are owners by default
+		Role:         string(model.RoleOwner),
 	}
 
 	if err := s.userRepo.Create(ctx, user); err != nil {
 		return nil, err
 	}
 
-	// Generate tokens
 	tokens, err := s.jwtManager.GenerateTokenPair(user.ID, user.Email, user.Role)
 	if err != nil {
 		return nil, err
@@ -100,10 +96,8 @@ func (s *AuthService) Login(ctx context.Context, input LoginInput) (*AuthRespons
 		return nil, ErrInvalidCredentials
 	}
 
-	// Update last login
 	_ = s.userRepo.UpdateLastLogin(ctx, user.ID)
 
-	// Generate tokens
 	tokens, err := s.jwtManager.GenerateTokenPair(user.ID, user.Email, user.Role)
 	if err != nil {
 		return nil, err
@@ -142,11 +136,21 @@ func (s *AuthService) UpdateProfile(ctx context.Context, userID uuid.UUID, input
 	if input.Name != "" {
 		user.Name = input.Name
 	}
-	user.Phone = input.Phone
-	user.City = input.City
-	user.Bio = input.Bio
-	user.Company = input.Company
-	user.Website = input.Website
+	if input.Phone != "" {
+		user.Phone = &input.Phone
+	}
+	if input.City != "" {
+		user.City = &input.City
+	}
+	if input.Bio != "" {
+		user.Bio = &input.Bio
+	}
+	if input.Company != "" {
+		user.Company = &input.Company
+	}
+	if input.Website != "" {
+		user.Website = &input.Website
+	}
 
 	if err := s.userRepo.UpdateProfile(ctx, user); err != nil {
 		return nil, err
