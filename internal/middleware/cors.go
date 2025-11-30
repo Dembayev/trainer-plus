@@ -17,9 +17,15 @@ func CORS(allowedOrigins []string) func(http.Handler) http.Handler {
 					allowed = true
 					break
 				}
+				// Allow subdomains of vercel.app
+				if strings.HasSuffix(origin, ".vercel.app") && strings.Contains(o, "vercel.app") {
+					allowed = true
+					break
+				}
 			}
 
-			if allowed {
+			// Always set the origin header if we have one
+			if origin != "" && allowed {
 				w.Header().Set("Access-Control-Allow-Origin", origin)
 			}
 
@@ -42,13 +48,16 @@ func CORS(allowedOrigins []string) func(http.Handler) http.Handler {
 func CORSFromConfig(frontendURL string) func(http.Handler) http.Handler {
 	origins := []string{frontendURL}
 	
-	// In development, also allow localhost variants
-	if strings.Contains(frontendURL, "localhost") {
-		origins = append(origins, 
-			"http://localhost:3000",
-			"http://localhost:5173",
-			"http://127.0.0.1:5173",
-		)
+	// Always allow localhost variants for development
+	origins = append(origins, 
+		"http://localhost:3000",
+		"http://localhost:5173",
+		"http://127.0.0.1:5173",
+	)
+
+	// If it's a vercel app, also allow the base domain pattern
+	if strings.Contains(frontendURL, "vercel.app") {
+		origins = append(origins, "https://vercel.app")
 	}
 
 	return CORS(origins)
