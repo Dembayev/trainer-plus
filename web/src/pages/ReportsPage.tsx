@@ -186,7 +186,7 @@ function FinanceReportView({ report }: { report: FinanceReport }) {
       <div className="card p-6">
         <h3 className="font-semibold mb-4">Доход по группам</h3>
         <div className="space-y-3">
-          {report.payments_by_group.map(g => (
+          {(report.payments_by_group || []).map(g => (
             <div key={g.group_id} className="flex items-center justify-between">
               <span>{g.group_title}</span>
               <span className="font-semibold">{g.amount.toLocaleString()} ₸</span>
@@ -201,7 +201,7 @@ function FinanceReportView({ report }: { report: FinanceReport }) {
       <div className="card p-6">
         <h3 className="font-semibold mb-4">По способу оплаты</h3>
         <div className="space-y-3">
-          {report.payments_by_method.map(m => (
+          {(report.payments_by_method || []).map(m => (
             <div key={m.method} className="flex items-center justify-between">
               <span className="capitalize">{m.method === 'stripe' ? 'Карта' : m.method === 'cash' ? 'Наличные' : m.method}</span>
               <span className="font-semibold">{m.amount.toLocaleString()} ₸</span>
@@ -243,7 +243,7 @@ function OccupancyReportView({ report }: { report: OccupancyReport }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
-            {report.group_stats.map(g => (
+            {(report.group_stats || []).map(g => (
               <tr key={g.group_id}>
                 <td className="px-4 py-3 font-medium">{g.group_title}</td>
                 <td className="px-4 py-3 text-center">{g.capacity}</td>
@@ -290,7 +290,7 @@ function StudentsReportView({ report }: { report: StudentsReport }) {
       <div className="card p-6">
         <h3 className="font-semibold mb-4">Топ учеников по посещаемости</h3>
         <div className="space-y-3">
-          {report.top_students.map((s, i) => (
+          {(report.top_students || []).map((s, i) => (
             <div key={s.student_id} className="flex items-center justify-between p-3 bg-gray-50 rounded">
               <div className="flex items-center gap-3">
                 <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium">
@@ -341,7 +341,7 @@ function DebtReportView({ report }: { report: DebtReport }) {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
-              {report.debtors.map(d => (
+              {(report.debtors || []).map(d => (
                 <tr key={d.student_id}>
                   <td className="px-4 py-3 font-medium">{d.student_name}</td>
                   <td className="px-4 py-3">
