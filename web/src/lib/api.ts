@@ -4,7 +4,6 @@ const API_BASE_URL = import.meta.env.VITE_API_URL
   ? `${import.meta.env.VITE_API_URL}/api/v1`
   : '/api/v1';
 
-// Create axios instance
 export const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -12,7 +11,6 @@ export const api = axios.create({
   },
 });
 
-// Token management
 let accessToken: string | null = null;
 
 export const setAccessToken = (token: string | null) => {
@@ -31,7 +29,6 @@ export const getAccessToken = () => {
   return accessToken;
 };
 
-// Request interceptor - add auth token
 api.interceptors.request.use(
   (config) => {
     const token = getAccessToken();
@@ -43,54 +40,46 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response interceptor - handle errors
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-
-    // Handle 401 - try to refresh token
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-
       try {
         const refreshToken = localStorage.getItem('refresh_token');
         if (refreshToken) {
           const response = await axios.post(`${API_BASE_URL}/auth/refresh`, {
             refresh_token: refreshToken,
           });
-
           const { access_token, refresh_token } = response.data.data;
           setAccessToken(access_token);
           localStorage.setItem('refresh_token', refresh_token);
-
           originalRequest.headers.Authorization = `Bearer ${access_token}`;
           return api(originalRequest);
         }
       } catch (refreshError) {
-        // Refresh failed - logout
         setAccessToken(null);
         localStorage.removeItem('refresh_token');
         window.location.href = '/login';
       }
     }
-
     return Promise.reject(error);
   }
 );
 
-// API Types
+// Types
 export interface User {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
   phone?: string;
   city?: string;
   bio?: string;
   company?: string;
   website?: string;
   avatar?: string;
-  id: string;
-  email: string;
-  name: string;
-  role: string;
   created_at: string;
 }
 
@@ -122,6 +111,7 @@ export interface Session {
   start_at: string;
   duration_minutes: number;
   location?: string;
+  created_at?: string;
 }
 
 export interface Student {
@@ -167,7 +157,6 @@ export interface DashboardStats {
   pending_payments: number;
 }
 
-// API Response wrapper
 interface ApiResponse<T> {
   success: boolean;
   data: T;
@@ -181,13 +170,10 @@ interface ApiResponse<T> {
 export const authApi = {
   signup: (data: { email: string; password: string; name: string }) =>
     api.post<ApiResponse<{ user: User; access_token: string; refresh_token: string }>>('/auth/signup', data),
-
   login: (data: { email: string; password: string }) =>
     api.post<ApiResponse<{ user: User; access_token: string; refresh_token: string }>>('/auth/login', data),
-
   refresh: (refreshToken: string) =>
     api.post<ApiResponse<{ access_token: string; refresh_token: string }>>('/auth/refresh', { refresh_token: refreshToken }),
-
   me: () => api.get<ApiResponse<User>>('/auth/me'),
 };
 
@@ -212,19 +198,10 @@ export const groupsApi = {
 
 // Sessions API
 export const sessionsApi = {
-  list: (groupId: string, from?: string, to?: string) =>
-    api.get<ApiResponse<Session[]>>(`/groups/${groupId}/sessions`, { params: { from, to } }),
+  list: (groupId: string) => api.get<ApiResponse<Session[]>>(`/groups/${groupId}/sessions`),
   get: (id: string) => api.get<ApiResponse<Session>>(`/sessions/${id}`),
-  create: (groupId: string, data: Partial<Session>) =>
+  create: (groupId: string, data: { start_at: string; duration_minutes: number; location?: string }) =>
     api.post<ApiResponse<Session>>(`/groups/${groupId}/sessions`, data),
-  createRecurring: (groupId: string, data: {
-    start_time: string;
-    weekdays: number[];
-    from_date: string;
-    to_date: string;
-    duration_minutes: number;
-    location?: string;
-  }) => api.post<ApiResponse<{ created_count: number }>>(`/groups/${groupId}/sessions/recurring`, data),
   update: (id: string, data: Partial<Session>) => api.put<ApiResponse<Session>>(`/sessions/${id}`, data),
   delete: (id: string) => api.delete(`/sessions/${id}`),
 };
@@ -248,14 +225,8 @@ export const subscriptionsApi = {
   listByStudent: (studentId: string) =>
     api.get<ApiResponse<Subscription[]>>(`/students/${studentId}/subscriptions`),
   get: (id: string) => api.get<ApiResponse<Subscription>>(`/subscriptions/${id}`),
-  create: (data: {
-    student_id: string;
-    group_id: string;
-    total_sessions: number;
-    price: number;
-    starts_at?: string;
-    expires_at?: string;
-  }) => api.post<ApiResponse<Subscription>>('/subscriptions', data),
+  create: (data: { student_id: string; group_id: string; total_sessions: number; price: number }) =>
+    api.post<ApiResponse<Subscription>>('/subscriptions', data),
   cancel: (id: string) => api.put<ApiResponse<Subscription>>(`/subscriptions/${id}/cancel`),
 };
 
@@ -265,10 +236,8 @@ export const attendanceApi = {
     api.get<ApiResponse<Attendance[]>>(`/sessions/${sessionId}/attendance`),
   mark: (data: { session_id: string; student_id: string; status: string }) =>
     api.post<ApiResponse<Attendance>>('/attendance', data),
-  bulkMark: (data: {
-    session_id: string;
-    attendances: { student_id: string; status: string }[];
-  }) => api.post<ApiResponse<{ results: any[] }>>('/attendance/bulk', data),
+  bulkMark: (data: { session_id: string; attendances: { student_id: string; status: string }[] }) =>
+    api.post<ApiResponse<{ results: Attendance[] }>>('/attendance/bulk', data),
   update: (id: string, data: { status: string }) =>
     api.put<ApiResponse<Attendance>>(`/attendance/${id}`, data),
   delete: (id: string) => api.delete(`/attendance/${id}`),
@@ -277,27 +246,22 @@ export const attendanceApi = {
 // Payments API
 export const paymentsApi = {
   createCheckout: (data: {
-    student?: { name: string; parent_contact?: { name?: string; phone?: string; email?: string } };
     student_id?: string;
     group_id: string;
     subscription: { total_sessions: number; price: number };
     success_url: string;
     cancel_url: string;
   }) => api.post<ApiResponse<{ checkout_url: string; session_id: string }>>('/payments/create-checkout-session', data),
-  createManual: (data: { subscription_id: string; amount: number; method: string; notes?: string }) =>
+  createManual: (data: { subscription_id: string; amount: number; method: string }) =>
     api.post<ApiResponse<any>>('/payments/manual', data),
 };
+
+export default api;
 
 // Public API (no auth required)
 export const publicApi = {
   getSchedule: (clubId: string, from?: string, to?: string) =>
-    axios.get<ApiResponse<{
-      club: Club;
-      groups: Group[];
-      sessions: (Session & { group_title: string })[];
-    }>>(`${API_BASE_URL.replace('/api/v1', '')}/public/club/${clubId}/schedule`, { params: { from, to } }),
+    axios.get(`${API_BASE_URL.replace('/api/v1', '')}/public/club/${clubId}/schedule`, { params: { from, to } }),
   getGroups: (clubId: string) =>
-    axios.get<ApiResponse<Group[]>>(`${API_BASE_URL.replace('/api/v1', '')}/public/club/${clubId}/groups`),
+    axios.get(`${API_BASE_URL.replace('/api/v1', '')}/public/club/${clubId}/groups`),
 };
-
-export default api;

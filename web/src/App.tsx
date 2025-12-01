@@ -9,6 +9,7 @@ import GroupsPage from './pages/GroupsPage';
 import StudentsPage from './pages/StudentsPage';
 import SubscriptionsPage from './pages/SubscriptionsPage';
 import ReportsPage from './pages/ReportsPage';
+import AttendancePage from './pages/AttendancePage';
 import ProfilePage from './pages/ProfilePage';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/clubs/:clubId/groups" element={<PrivateRoute><GroupsPage /></PrivateRoute>} />
           <Route path="/clubs/:clubId/students" element={<PrivateRoute><StudentsPage /></PrivateRoute>} />
           <Route path="/clubs/:clubId/subscriptions" element={<PrivateRoute><SubscriptionsPage /></PrivateRoute>} />
+          <Route path="/attendance" element={<PrivateRoute><AttendancePage /></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
           <Route path="/clubs/:clubId/reports" element={<PrivateRoute><ReportsPage /></PrivateRoute>} />
           <Route path="*" element={<Navigate to="/" />} />
