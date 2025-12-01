@@ -37,7 +37,7 @@ export default function App() {
           <Route path="/clubs/:clubId" element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
           <Route path="/clubs/:clubId/groups" element={<PrivateRoute><GroupsPage /></PrivateRoute>} />
           <Route path="/clubs/:clubId/students" element={<PrivateRoute><StudentsPage /></PrivateRoute>} />
-          <Route path="/clubs/:clubId/subscriptions" element={<PrivateRoute><SubscriptionsPage /></PrivateRoute>} />
+          <Route path="/subscriptions" element={<PrivateRoute><SubscriptionsPage /></PrivateRoute>} />
           <Route path="/attendance" element={<PrivateRoute><AttendancePage /></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
           <Route path="/clubs/:clubId/reports" element={<PrivateRoute><ReportsPage /></PrivateRoute>} />
