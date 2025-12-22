@@ -1,0 +1,214 @@
+<mxfile host="app.diagrams.net" modified="2024-12-03T00:00:00.000Z" agent="5.0" version="21.0.0" etag="draw.io" type="device">
+  <diagram id="OrderLifecycleStateMachine" name="Order Lifecycle State Machine">
+    <mxGraphModel dx="1434" dy="820" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Title -->
+        <mxCell id="title" value="Order Lifecycle - State Machine Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="600" y="20" width="400" height="40" as="geometry"/>
+        </mxCell>
+        
+        <!-- Initial State -->
+        <mxCell id="initial" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="80" y="120" width="30" height="30" as="geometry"/>
+        </mxCell>
+        
+        <!-- Cart Created State -->
+        <mxCell id="cartCreated" value="&lt;b&gt;Cart Created&lt;/b&gt;&lt;br&gt;─────────────&lt;br&gt;entry / InitializeCart&lt;br&gt;do / AllowAddingItems&lt;br&gt;exit / SaveCartState" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=5;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="200" y="90" width="180" height="100" as="geometry"/>
+        </mxCell>
+        
+        <!-- Cart Abandoned State -->
+        <mxCell id="cartAbandoned" value="&lt;b&gt;Cart Abandoned&lt;/b&gt;&lt;br&gt;─────────────&lt;br&gt;entry / ClearCart" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;verticalAlign=top;spacingLeft=5;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="200" y="250" width="180" height="80" as="geometry"/>
+        </mxCell>
+        
+        <!-- Checking Out State -->
+        <mxCell id="checkingOut" value="&lt;b&gt;Checking Out&lt;/b&gt;&lt;br&gt;─────────────&lt;br&gt;entry / LockCartItems&lt;br&gt;do / DisplayPaymentForm&lt;br&gt;exit / LogCheckoutAttempt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=5;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="480" y="90" width="200" height="100" as="geometry"/>
+        </mxCell>
+        
+        <!-- Payment Pending State -->
+        <mxCell id="paymentPending" value="&lt;b&gt;Payment Pending&lt;/b&gt;&lt;br&gt;─────────────&lt;br&gt;entry / SendToPaymentGateway&lt;br&gt;do / WaitForConfirmation&lt;br&gt;exit / RecordPaymentResult" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=5;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="780" y="90" width="220" height="100" as="geometry"/>
+        </mxCell>
+        
+        <!-- Payment Failed State -->
+        <mxCell id="paymentFailed" value="&lt;b&gt;Payment Failed&lt;/b&gt;&lt;br&gt;─────────────&lt;br&gt;entry / LogFailureReason&lt;br&gt;do / DisplayErrorMessage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;verticalAlign=top;spacingLeft=5;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="780" y="250" width="220" height="90" as="geometry"/>
+        </mxCell>
+        
+        <!-- Payment Confirmed State -->
+        <mxCell id="paymentConfirmed" value="&lt;b&gt;Payment Confirmed&lt;/b&gt;&lt;br&gt;─────────────&lt;br&gt;entry / CreateOrderRecord&lt;br&gt;do / SendConfirmationEmail&lt;br&gt;exit / NotifyWarehouse" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=5;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="90" width="220" height="100" as="geometry"/>
+        </mxCell>
+        
+        <!-- Order Processing State -->
+        <mxCell id="orderProcessing" value="&lt;b&gt;Order Processing&lt;/b&gt;&lt;br&gt;─────────────&lt;br&gt;entry / AllocateInventory&lt;br&gt;do / PreparePackage&lt;br&gt;exit / GenerateShippingLabel" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=5;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="250" width="220" height="100" as="geometry"/>
+        </mxCell>
+        
+        <!-- Shipping State -->
+        <mxCell id="shipping" value="&lt;b&gt;Shipping&lt;/b&gt;&lt;br&gt;─────────────&lt;br&gt;entry / HandOverToCarrier&lt;br&gt;do / TrackShipment&lt;br&gt;exit / UpdateDeliveryStatus" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=5;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="420" width="220" height="100" as="geometry"/>
+        </mxCell>
+        
+        <!-- Delivered State -->
+        <mxCell id="delivered" value="&lt;b&gt;Delivered&lt;/b&gt;&lt;br&gt;─────────────&lt;br&gt;entry / ConfirmDelivery&lt;br&gt;do / SendFeedbackRequest" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=5;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="590" width="220" height="90" as="geometry"/>
+        </mxCell>
+        
+        <!-- Return Requested State -->
+        <mxCell id="returnRequested" value="&lt;b&gt;Return Requested&lt;/b&gt;&lt;br&gt;─────────────&lt;br&gt;entry / ValidateReturnEligibility&lt;br&gt;do / GenerateReturnLabel&lt;br&gt;exit / NotifyReturnCenter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=5;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="780" y="750" width="220" height="100" as="geometry"/>
+        </mxCell>
+        
+        <!-- Return In Transit State -->
+        <mxCell id="returnInTransit" value="&lt;b&gt;Return In Transit&lt;/b&gt;&lt;br&gt;─────────────&lt;br&gt;entry / TrackReturnShipment&lt;br&gt;do / MonitorReturnProgress" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=5;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="780" y="920" width="220" height="90" as="geometry"/>
+        </mxCell>
+        
+        <!-- Return Received State -->
+        <mxCell id="returnReceived" value="&lt;b&gt;Return Received&lt;/b&gt;&lt;br&gt;─────────────&lt;br&gt;entry / InspectReturnedItems&lt;br&gt;do / ProcessRefund" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=5;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="480" y="920" width="220" height="90" as="geometry"/>
+        </mxCell>
+        
+        <!-- Cancelled State -->
+        <mxCell id="cancelled" value="&lt;b&gt;Cancelled&lt;/b&gt;&lt;br&gt;─────────────&lt;br&gt;entry / ProcessCancellation&lt;br&gt;do / IssueRefund" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;verticalAlign=top;spacingLeft=5;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="480" y="590" width="220" height="90" as="geometry"/>
+        </mxCell>
+        
+        <!-- Final State -->
+        <mxCell id="final" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="275" y="1070" width="30" height="30" as="geometry"/>
+        </mxCell>
+        
+        <!-- Transitions -->
+        
+        <!-- Initial to CartCreated -->
+        <mxCell id="trans1" value="User creates cart" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="initial" target="cartCreated">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- CartCreated to CartAbandoned -->
+        <mxCell id="trans2" value="[timeout &gt; 24h]&lt;br&gt;/ ClearCart" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cartCreated" target="cartAbandoned">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- CartCreated to CheckingOut -->
+        <mxCell id="trans3" value="User proceeds to checkout&lt;br&gt;[cart.items &gt; 0]&lt;br&gt;/ ValidateCart" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cartCreated" target="checkingOut">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- CheckingOut to CartCreated -->
+        <mxCell id="trans4" value="User cancels checkout&lt;br&gt;/ UnlockItems" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="checkingOut" target="cartCreated">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- CheckingOut to PaymentPending -->
+        <mxCell id="trans5" value="User submits payment&lt;br&gt;[paymentInfo.isValid()]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="checkingOut" target="paymentPending">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- PaymentPending to PaymentFailed -->
+        <mxCell id="trans6" value="[payment declined]&lt;br&gt;/ NotifyUser" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="paymentPending" target="paymentFailed">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- PaymentPending to PaymentConfirmed -->
+        <mxCell id="trans7" value="[payment successful]&lt;br&gt;/ CreateOrder" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="paymentPending" target="paymentConfirmed">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- PaymentFailed to CheckingOut -->
+        <mxCell id="trans8" value="User retries payment&lt;br&gt;[retryCount &lt; 3]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="paymentFailed" target="checkingOut">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- PaymentFailed to Cancelled -->
+        <mxCell id="trans9" value="[retryCount &gt;= 3]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="paymentFailed" target="cancelled">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- PaymentConfirmed to OrderProcessing -->
+        <mxCell id="trans10" value="Warehouse notified" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="paymentConfirmed" target="orderProcessing">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- PaymentConfirmed to Cancelled -->
+        <mxCell id="trans11" value="User cancels&lt;br&gt;[processingStarted == false]&lt;br&gt;/ InitiateRefund" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="paymentConfirmed" target="cancelled">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- OrderProcessing to Shipping -->
+        <mxCell id="trans12" value="Package ready&lt;br&gt;[allItemsPacked]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="orderProcessing" target="shipping">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- OrderProcessing to Cancelled -->
+        <mxCell id="trans13" value="Processing failed&lt;br&gt;[inventoryUnavailable]&lt;br&gt;/ NotifyAndRefund" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="orderProcessing" target="cancelled">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Shipping to Delivered -->
+        <mxCell id="trans14" value="Delivery confirmed&lt;br&gt;[signature received]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="shipping" target="delivered">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Delivered to ReturnRequested -->
+        <mxCell id="trans15" value="Customer requests return&lt;br&gt;[daysFromDelivery &lt;= 30]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="delivered" target="returnRequested">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Delivered to Final -->
+        <mxCell id="trans16" value="Return window expired&lt;br&gt;[days &gt; 30 &amp;&amp; noIssues]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="delivered" target="final">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1050" y="635"/>
+              <mxPoint x="1050" y="1050"/>
+              <mxPoint x="305" y="1050"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- ReturnRequested to ReturnInTransit -->
+        <mxCell id="trans17" value="Return shipped&lt;br&gt;[returnApproved]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="returnRequested" target="returnInTransit">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- ReturnRequested to Delivered -->
+        <mxCell id="trans18" value="Return denied&lt;br&gt;[!returnEligible]&lt;br&gt;/ NotifyCustomer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="returnRequested" target="delivered">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- ReturnInTransit to ReturnReceived -->
+        <mxCell id="trans19" value="Return arrived" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="returnInTransit" target="returnReceived">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- ReturnReceived to Final -->
+        <mxCell id="trans20" value="Refund processed&lt;br&gt;[inspected &amp;&amp; refunded]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="returnReceived" target="final">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Cancelled to Final -->
+        <mxCell id="trans21" value="Refund completed" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="cancelled" target="final">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- CartAbandoned to Final -->
+        <mxCell id="trans22" value="Cart cleared" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="cartAbandoned" target="final">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="290" y="1100"/>
+              <mxPoint x="275" y="1100"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
