@@ -1,8 +1,8 @@
 {
   "framework": "vite",
   "rewrites": [
-    { "source": "/dental-quiz.html", "destination": "/dental-quiz.html" },
-    { "source": "/((?!assets|icons|sw.js|manifest.json).*)", "destination": "/index.html" }
+    { "source": "/quiz", "destination": "/quiz.html" },
+    { "source": "/((?!assets|icons|sw.js|manifest.json|quiz.html).*)", "destination": "/index.html" }
   ],
   "headers": [
     {
