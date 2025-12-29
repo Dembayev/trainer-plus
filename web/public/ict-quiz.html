@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICT Test - 118 Questions</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>* { box-sizing: border-box; } body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const questions = [
+  { id: 1, question: "What does ICT stand for?", options: ["Internet Computer Technology", "Information and Communication Technology", "Integrated Circuit Technology", "International Computing Terms", "Internal Computer Transfer"], correct: 1 },
+  { id: 2, question: "Which of the following is NOT an example of ICT?", options: ["Smartphone", "Email", "Television broadcast", "Wooden desk", "Social media"], correct: 3 },
+  { id: 3, question: "Which of the following is NOT a general approach to instructional use of computers?", options: ["Computer-Assisted Instruction", "Computer-Managed Instruction", "Computer-Based Training", "Computer-Physical Education", "E-learning"], correct: 3 },
+  { id: 4, question: "The purpose of ICT as a subject is to:", options: ["Replace traditional education", "Develop digital literacy and skills", "Eliminate paper usage", "Reduce employment", "Limit communication"], correct: 1 },
+  { id: 5, question: "Which of the following is an example of ICT in education?", options: ["Chalkboard", "E-learning platforms", "Paper textbooks", "Wooden ruler", "Physical laboratory"], correct: 1 },
+  { id: 6, question: "Which of these is a benefit of ICT in business?", options: ["Slower communication", "Increased operational costs", "Improved efficiency and productivity", "Reduced customer reach", "Limited data storage"], correct: 2 },
+  { id: 7, question: "Which ICT system is mainly used for online learning?", options: ["ATM machine", "Learning Management System (LMS)", "Traffic control system", "Barcode scanner", "Cash register"], correct: 1 },
+  { id: 8, question: "What is the main role of ICT in society?", options: ["To eliminate jobs", "To facilitate communication and information sharing", "To increase pollution", "To reduce literacy", "To limit access to knowledge"], correct: 1 },
+  { id: 9, question: "Why is binary representation used in computers?", options: ["It uses 10 digits", "Computers use electrical signals with two states (on/off)", "It is easier for humans to read", "It requires more memory", "It was invented recently"], correct: 1 },
+  { id: 10, question: "How many different values can 3 bits represent?", options: ["3", "6", "8", "16", "32"], correct: 2 },
+  { id: 11, question: "Which of the following is an example of analog data?", options: ["Digital photo", "MP3 file", "Sound waves", "Text file", "Binary code"], correct: 2 },
+  { id: 12, question: "What is ASCII used for?", options: ["Image compression", "Character encoding", "Video streaming", "Network security", "Database management"], correct: 1 },
+  { id: 13, question: "How many codes are defined in the ASCII 7-bit system?", options: ["64", "128", "256", "512", "1024"], correct: 1 },
+  { id: 14, question: "How many values can 8 bits (1 byte) represent?", options: ["8", "16", "128", "256", "512"], correct: 3 },
+  { id: 15, question: "Unicode was developed because:", options: ["ASCII was too large", "ASCII could not represent all world languages", "Binary was inefficient", "Computers needed fewer characters", "ASCII was too expensive"], correct: 1 },
+  { id: 16, question: "Which numbering system is commonly used in computing besides binary?", options: ["Roman numerals", "Hexadecimal", "Fraction system", "Decimal only", "Alphabetic system"], correct: 1 },
+  { id: 17, question: "Which of the following is a control code in ASCII?", options: ["Letter A", "Number 5", "Carriage Return", "Symbol @", "Space character"], correct: 2 },
+  { id: 18, question: "Which technology uses unique human characteristics for authentication?", options: ["Password system", "Biometric technology", "Firewall", "Encryption", "Antivirus"], correct: 1 },
+  { id: 19, question: "Which of the following is an example of vision enhancement technology?", options: ["Hearing aids", "Night vision goggles", "Voice recorder", "Keyboard", "Printer"], correct: 1 },
+  { id: 20, question: "Deep Blue, developed by IBM, is known for:", options: ["Web browsing", "Playing chess against world champions", "Word processing", "Email service", "Social networking"], correct: 1 },
+  { id: 21, question: "Quantum cryptography is mainly used for:", options: ["Gaming", "Secure communication", "Video editing", "Music production", "Word processing"], correct: 1 },
+  { id: 22, question: "Which emerging technology provides immersive artificial environments?", options: ["Email", "Virtual Reality (VR)", "Spreadsheets", "Word processors", "Calculators"], correct: 1 },
+  { id: 23, question: "Which of the following is an application of robotics in healthcare?", options: ["Playing games", "Surgical robots", "Social media", "Web browsing", "Text messaging"], correct: 1 },
+  { id: 24, question: "Which emerging technology uses holograms?", options: ["Traditional printing", "Holographic displays", "Radio transmission", "Fax machines", "Typewriters"], correct: 1 },
+  { id: 25, question: "Which of the following uses iris scanning for authentication?", options: ["Traditional lock", "Biometric security systems", "Paper documents", "Manual signature", "Voice mail"], correct: 1 },
+  { id: 26, question: "Which of the following is NOT an emerging technology?", options: ["Artificial Intelligence", "Quantum Computing", "Typewriter", "Virtual Reality", "Blockchain"], correct: 2 },
+  { id: 27, question: "Which interface type uses WIMP (Windows, Icons, Menus, Pointers)?", options: ["Command Line Interface", "Graphical User Interface (GUI)", "Voice Interface", "Touch Interface", "Gesture Interface"], correct: 1 },
+  { id: 28, question: "A system that uses both voice and gesture input is an example of:", options: ["Single-modal interface", "Multimodal interface", "Command line", "Text interface", "Print interface"], correct: 1 },
+  { id: 29, question: "Which interface requires users to type commands?", options: ["GUI", "Command Line Interface (CLI)", "Touch screen", "Voice interface", "Gesture interface"], correct: 1 },
+  { id: 30, question: "Which interface is best for novice users?", options: ["Command Line Interface", "Graphical User Interface (GUI)", "Terminal", "DOS prompt", "Shell scripting"], correct: 1 },
+  { id: 31, question: "Natural Language Interface allows users to:", options: ["Type complex codes", "Communicate using everyday language", "Use only mouse clicks", "Draw pictures", "Use sign language only"], correct: 1 },
+  { id: 32, question: "Which interface is the most resource-efficient?", options: ["GUI with animations", "Command Line Interface", "Virtual Reality interface", "3D graphics interface", "Video interface"], correct: 1 },
+  { id: 33, question: "Which of the following is an advantage of GUI?", options: ["Requires memorizing commands", "User-friendly and intuitive", "Uses less memory than CLI", "Faster than typing", "No graphics required"], correct: 1 },
+  { id: 34, question: "Which interface may struggle with homonyms in language?", options: ["GUI", "CLI", "Natural Language Interface", "Touch interface", "Keyboard interface"], correct: 2 },
+  { id: 35, question: "Multimodal HCI is useful because:", options: ["It limits user options", "It provides multiple ways to interact", "It only uses keyboard", "It removes the mouse", "It eliminates voice control"], correct: 1 },
+  { id: 36, question: "Which file extension is commonly used for compressed files in Windows?", options: [".doc", ".zip", ".mp3", ".jpg", ".exe"], correct: 1 },
+  { id: 37, question: "Which of the following is NOT a common file extension for multimedia?", options: [".mp4", ".wav", ".jpg", ".exe", ".mp3"], correct: 3 },
+  { id: 38, question: "What does a file extension represent?", options: ["File size", "File type or format", "File location", "File owner", "File date"], correct: 1 },
+  { id: 39, question: "Which of the following is an example of a graphics file format?", options: [".mp3", ".docx", ".png", ".exe", ".txt"], correct: 2 },
+  { id: 40, question: "Which Windows shortcut is used to copy files?", options: ["Ctrl+V", "Ctrl+C", "Ctrl+X", "Ctrl+Z", "Ctrl+S"], correct: 1 },
+  { id: 41, question: "Which file extension is used for Excel spreadsheets?", options: [".doc", ".ppt", ".xlsx", ".pdf", ".txt"], correct: 2 },
+  { id: 42, question: "Which of the following storage media typically holds the largest amount of data?", options: ["Floppy disk", "CD-ROM", "Hard disk drive", "USB flash drive (2GB)", "DVD"], correct: 2 },
+  { id: 43, question: "Which shortcut is used to paste a file in Windows?", options: ["Ctrl+C", "Ctrl+V", "Ctrl+X", "Ctrl+P", "Ctrl+A"], correct: 1 },
+  { id: 44, question: "Which of these is a compressed multimedia format?", options: [".bmp", ".wav", ".mp3", ".tiff", ".raw"], correct: 2 },
+  { id: 45, question: "In a relational database, a foreign key is used to:", options: ["Delete records", "Link tables together", "Create new databases", "Format text", "Print reports"], correct: 1 },
+  { id: 46, question: "Which is an advantage of computer-based database over paper-based?", options: ["Slower access", "Easier to search and retrieve data", "Takes more physical space", "Harder to backup", "Less secure"], correct: 1 },
+  { id: 47, question: "Which of the following is an example of a primary key?", options: ["Customer name", "Unique student ID number", "Phone number", "Email address", "Date of birth"], correct: 1 },
+  { id: 48, question: "Which database object stores data in rows and columns?", options: ["Query", "Form", "Table", "Report", "Macro"], correct: 2 },
+  { id: 49, question: "Which database operation is used to find and display specific data?", options: ["Table", "Query", "Form", "Module", "Macro"], correct: 1 },
+  { id: 50, question: "Which of the following is an example of a DBMS?", options: ["Microsoft Word", "Microsoft Access", "Adobe Photoshop", "Windows Media Player", "Notepad"], correct: 1 },
+  { id: 51, question: "Which of these is NOT a database object?", options: ["Table", "Query", "Spreadsheet cell", "Form", "Report"], correct: 2 },
+  { id: 52, question: "Which key uniquely identifies each record in a table?", options: ["Foreign key", "Primary key", "Composite key", "Candidate key", "Sort key"], correct: 1 },
+  { id: 53, question: "Which operation is used to combine data from two tables?", options: ["Delete", "Join", "Insert", "Update", "Drop"], correct: 1 },
+  { id: 54, question: "Which of the following is an absolute cell reference in Excel?", options: ["A1", "A$1", "$A$1", "A:1", "1A"], correct: 2 },
+  { id: 55, question: "Which feature in spreadsheets is used to test different scenarios?", options: ["Formatting", "What-If Analysis", "Printing", "Sorting", "Filtering"], correct: 1 },
+  { id: 56, question: "Which of the following is NOT a type of test data?", options: ["Normal data", "Boundary data", "Erroneous data", "Colorful data", "Extreme data"], correct: 3 },
+  { id: 57, question: "Which chart type is most suitable for showing proportions?", options: ["Line chart", "Bar chart", "Pie chart", "Scatter plot", "Area chart"], correct: 2 },
+  { id: 58, question: "Which function returns the average of selected numbers?", options: ["SUM", "COUNT", "AVERAGE", "MAX", "MIN"], correct: 2 },
+  { id: 59, question: "Which of the following is an example of relative reference?", options: ["$A$1", "$A1", "A$1", "A1", "$1$A"], correct: 3 },
+  { id: 60, question: "Which function returns the largest value from a set of numbers?", options: ["MIN", "SUM", "AVERAGE", "MAX", "COUNT"], correct: 3 },
+  { id: 61, question: "Which spreadsheet feature is used to highlight cells based on conditions?", options: ["Data validation", "Conditional formatting", "Sorting", "Filtering", "Merging"], correct: 1 },
+  { id: 62, question: "Which chart is best for showing trends over time?", options: ["Pie chart", "Line chart", "Doughnut chart", "Radar chart", "Bubble chart"], correct: 1 },
+  { id: 63, question: "Which Excel function counts numeric values in a range?", options: ["SUM", "AVERAGE", "COUNT", "MAX", "IF"], correct: 2 },
+  { id: 64, question: "Which Excel tool is best for summarizing large data sets?", options: ["Spell check", "Pivot Table", "Find and Replace", "Print Preview", "Page Break"], correct: 1 },
+  { id: 65, question: "What does 'cell range' mean in spreadsheets?", options: ["A single cell", "A group of adjacent cells", "The entire worksheet", "A chart type", "A formula error"], correct: 1 },
+  { id: 66, question: "Which type of test data checks the boundaries of input values?", options: ["Normal data", "Boundary data", "Random data", "Empty data", "Text data"], correct: 1 },
+  { id: 67, question: "Which formula calculates the smallest value in a range?", options: ["=MAX()", "=SUM()", "=MIN()", "=AVERAGE()", "=COUNT()"], correct: 2 },
+  { id: 68, question: "In Excel, which feature allows you to prevent invalid data entry?", options: ["Conditional formatting", "Data validation", "AutoSum", "Flash Fill", "Goal Seek"], correct: 1 },
+  { id: 69, question: "Which Excel function adds up values in a range?", options: ["AVERAGE", "COUNT", "SUM", "MAX", "IF"], correct: 2 },
+  { id: 70, question: "Which of these is an example of system software?", options: ["Microsoft Word", "Operating System", "Adobe Photoshop", "Web Browser", "Video Game"], correct: 1 },
+  { id: 71, question: "What does URL stand for?", options: ["Universal Resource Locator", "Uniform Resource Locator", "United Resource Link", "Universal Remote Location", "Unified Resource Library"], correct: 1 },
+  { id: 72, question: "Which of the following is NOT a web browser?", options: ["Chrome", "Firefox", "Microsoft Word", "Safari", "Edge"], correct: 2 },
+  { id: 73, question: "Which protocol is used for secure communication on the web?", options: ["HTTP", "FTP", "HTTPS", "SMTP", "POP3"], correct: 2 },
+  { id: 74, question: "Which of the following is an example of malicious software?", options: ["Antivirus", "Firewall", "Virus", "Operating System", "Web Browser"], correct: 2 },
+  { id: 75, question: "The main function of a firewall is to:", options: ["Speed up internet", "Block unauthorized access", "Create documents", "Play multimedia", "Store files"], correct: 1 },
+  { id: 76, question: "Which of the following is NOT a programming language?", options: ["Python", "Java", "HTML", "Microsoft Excel", "C++"], correct: 3 },
+  { id: 77, question: "Which storage device uses flash memory?", options: ["Hard disk drive", "Floppy disk", "USB flash drive", "CD-ROM", "Magnetic tape"], correct: 2 },
+  { id: 78, question: "What does IP stand for in networking?", options: ["Internet Provider", "Internet Protocol", "Internal Program", "Information Process", "Integrated Platform"], correct: 1 },
+  { id: 79, question: "Which of the following is an example of an operating system?", options: ["Microsoft Word", "Google Chrome", "Windows 10", "Adobe Reader", "VLC Player"], correct: 2 },
+  { id: 80, question: "Which part of the computer is considered the brain?", options: ["RAM", "Hard Drive", "CPU", "Monitor", "Keyboard"], correct: 2 },
+  { id: 81, question: "Which of these is volatile memory?", options: ["Hard disk", "SSD", "RAM", "USB drive", "CD-ROM"], correct: 2 },
+  { id: 82, question: "Which device is used to display visual output from a computer?", options: ["Keyboard", "Mouse", "Monitor", "Speaker", "Microphone"], correct: 2 },
+  { id: 83, question: "Which of the following is an open-source operating system?", options: ["Windows", "macOS", "Linux", "iOS", "MS-DOS"], correct: 2 },
+  { id: 84, question: "Which of these is NOT an example of hardware?", options: ["Keyboard", "Monitor", "Microsoft Office", "Mouse", "Printer"], correct: 2 },
+  { id: 85, question: "Which device is used to connect multiple networks?", options: ["Mouse", "Keyboard", "Router", "Monitor", "Speaker"], correct: 2 },
+  { id: 86, question: "Which of the following is an example of application software?", options: ["Windows", "Linux", "Microsoft Word", "BIOS", "Device Driver"], correct: 2 },
+  { id: 87, question: "What does GUI stand for?", options: ["General User Input", "Graphical User Interface", "Global Unified Interface", "Graphics Unit Integration", "General Utility Interface"], correct: 1 },
+  { id: 88, question: "Which of these is a biometric security method?", options: ["Password", "PIN code", "Fingerprint scanning", "Security question", "CAPTCHA"], correct: 2 },
+  { id: 89, question: "What is phishing?", options: ["A type of fishing sport", "Fraudulent attempt to obtain sensitive information", "A programming language", "A type of firewall", "A network protocol"], correct: 1 },
+  { id: 90, question: "Which of these is an example of cloud storage?", options: ["USB drive", "Hard disk", "Google Drive", "CD-ROM", "Floppy disk"], correct: 2 },
+  { id: 91, question: "What is the main function of DNS?", options: ["Block viruses", "Translate domain names to IP addresses", "Encrypt data", "Speed up downloads", "Create websites"], correct: 1 },
+  { id: 92, question: "Which device provides power supply to the computer?", options: ["CPU", "RAM", "PSU (Power Supply Unit)", "GPU", "SSD"], correct: 2 },
+  { id: 93, question: "Which of these is a strong password?", options: ["password123", "12345678", "qwerty", "P@ssw0rd!2024", "abcdefgh"], correct: 3 },
+  { id: 94, question: "Which of these terms refers to illegal copying of software?", options: ["Freeware", "Shareware", "Software piracy", "Open source", "Public domain"], correct: 2 },
+  { id: 95, question: "Which symbol is used to start a formula in Excel?", options: ["#", "@", "=", "&", "$"], correct: 2 },
+  { id: 96, question: "What does the term multimedia mean?", options: ["Single type of media", "Multiple forms of media combined", "Only audio content", "Only video content", "Text documents only"], correct: 1 },
+  { id: 97, question: "Non-linear multimedia allows users to:", options: ["Only watch in sequence", "Navigate content in any order", "Only read text", "Only listen to audio", "Only view images"], correct: 1 },
+  { id: 98, question: "Which of the following is an example of linear multimedia?", options: ["Interactive website", "Video game", "Traditional movie/film", "Educational CD-ROM", "E-learning course"], correct: 2 },
+  { id: 99, question: "What is the main purpose of multimedia?", options: ["To reduce information", "To enhance communication and engagement", "To limit creativity", "To use only one sense", "To eliminate visuals"], correct: 1 },
+  { id: 100, question: "Which of the following is NOT a multimedia element?", options: ["Text", "Audio", "Spreadsheet formulas", "Video", "Animation"], correct: 2 },
+  { id: 101, question: "Which software is commonly used for multimedia presentations?", options: ["Microsoft Excel", "Microsoft PowerPoint", "Notepad", "Calculator", "File Explorer"], correct: 1 },
+  { id: 102, question: "Which of these is an example of interactive multimedia?", options: ["Traditional TV broadcast", "Radio program", "Video game", "Printed newspaper", "Audio CD"], correct: 2 },
+  { id: 103, question: "Which of the following is NOT a multimedia application?", options: ["Video editing software", "Music player", "Plain text editor", "Image viewer", "Animation software"], correct: 2 },
+  { id: 104, question: "Multimedia systems integrate:", options: ["Only text", "Only images", "Multiple types of media (text, audio, video, etc.)", "Only spreadsheets", "Only databases"], correct: 2 },
+  { id: 105, question: "In multimedia, animation refers to:", options: ["Static images", "Moving images or graphics", "Audio recordings", "Text documents", "Spreadsheet data"], correct: 1 },
+  { id: 106, question: "Which multimedia component deals with sound recording and playback?", options: ["Graphics", "Video", "Audio", "Text", "Animation"], correct: 2 },
+  { id: 107, question: "Which of the following describes video in multimedia?", options: ["Static pictures", "Moving pictures with or without sound", "Text only", "Audio only", "Spreadsheet data"], correct: 1 },
+  { id: 108, question: "Multimedia in education helps learners to:", options: ["Learn only through reading", "Engage through multiple senses", "Avoid visual content", "Focus only on audio", "Ignore interactive content"], correct: 1 },
+  { id: 109, question: "Which of these is an example of hardware used in multimedia systems?", options: ["Operating system", "Video editing software", "Graphics card", "Web browser", "Antivirus program"], correct: 2 },
+  { id: 110, question: "Which format is commonly used for digital video?", options: [".doc", ".mp4", ".txt", ".xlsx", ".ppt"], correct: 1 },
+  { id: 111, question: "What is the purpose of multimedia authoring tools?", options: ["To write code only", "To create interactive multimedia content", "To browse the internet", "To manage databases", "To create spreadsheets"], correct: 1 },
+  { id: 112, question: "Which of the following is a multimedia authoring software?", options: ["Microsoft Word", "Adobe Flash/Animate", "Notepad", "Calculator", "File Explorer"], correct: 1 },
+  { id: 113, question: "The main characteristic of a good multimedia project is:", options: ["Using only text", "Poor organization", "Effective integration of multiple media elements", "Low quality graphics", "No user interaction"], correct: 2 },
+  { id: 114, question: "Which of the following is an advantage of multimedia?", options: ["Limited engagement", "Enhanced learning and communication", "Single sensory input", "Reduced creativity", "Boring presentations"], correct: 1 },
+  { id: 115, question: "The process of combining text, audio, video, graphics, and animation is called:", options: ["Programming", "Multimedia integration", "Database management", "Networking", "Word processing"], correct: 1 },
+  { id: 116, question: "What is a computer network?", options: ["A single computer", "Two or more computers connected to share resources", "A type of software", "A storage device", "A programming language"], correct: 1 },
+  { id: 117, question: "Which of the following is NOT a type of computer network?", options: ["LAN", "WAN", "MAN", "PAN", "FAN"], correct: 4 },
+  { id: 118, question: "The main purpose of a computer network is to:", options: ["Isolate computers", "Share resources and communicate", "Slow down processes", "Increase costs", "Limit access"], correct: 1 }
+];
+
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+function App() {
+  const [mode, setMode] = React.useState('menu');
+  const [currentQuestion, setCurrentQuestion] = React.useState(0);
+  const [selectedAnswer, setSelectedAnswer] = React.useState(null);
+  const [answers, setAnswers] = React.useState([]);
+  const [showAnswer, setShowAnswer] = React.useState(false);
+  const [quizQuestions, setQuizQuestions] = React.useState([]);
+
+  const startQuiz = (count) => {
+    const shuffled = shuffleArray(questions).slice(0, count);
+    setQuizQuestions(shuffled);
+    setCurrentQuestion(0);
+    setAnswers([]);
+    setSelectedAnswer(null);
+    setShowAnswer(false);
+    setMode('quiz');
+  };
+
+  const handleAnswer = (index) => {
+    if (showAnswer) return;
+    setSelectedAnswer(index);
+  };
+
+  const confirmAnswer = () => {
+    if (selectedAnswer === null) return;
+    setShowAnswer(true);
+    setAnswers([...answers, {
+      questionId: quizQuestions[currentQuestion].id,
+      selected: selectedAnswer,
+      correct: quizQuestions[currentQuestion].correct,
+      isCorrect: selectedAnswer === quizQuestions[currentQuestion].correct
+    }]);
+  };
+
+  const nextQuestion = () => {
+    if (currentQuestion < quizQuestions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+      setSelectedAnswer(null);
+      setShowAnswer(false);
+    } else {
+      setMode('results');
+    }
+  };
+
+  const getScore = () => answers.filter(a => a.isCorrect).length;
+  const getPercentage = () => Math.round((getScore() / quizQuestions.length) * 100);
+
+  const getGrade = () => {
+    const pct = getPercentage();
+    if (pct >= 90) return { grade: 'Excellent', color: 'text-green-400', emoji: '🏆' };
+    if (pct >= 75) return { grade: 'Good', color: 'text-blue-400', emoji: '👍' };
+    if (pct >= 60) return { grade: 'Satisfactory', color: 'text-yellow-400', emoji: '📚' };
+    return { grade: 'Needs Improvement', color: 'text-red-400', emoji: '📖' };
+  };
+
+  if (mode === 'menu') {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-cyan-900 via-blue-900 to-indigo-900 text-white flex items-center justify-center p-4">
+        <div className="max-w-lg w-full">
+          <div className="text-center mb-8">
+            <div className="text-6xl mb-4">💻</div>
+            <h1 className="text-3xl font-bold mb-2">ICT Test</h1>
+            <p className="text-gray-300">Information and Communication Technology</p>
+            <p className="text-sm text-gray-400 mt-2">{questions.length} questions in database</p>
+          </div>
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 space-y-3">
+            <h2 className="text-xl font-semibold text-center mb-4">Select number of questions:</h2>
+            <button onClick={() => startQuiz(10)} className="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-green-500/30 transition-all">🚀 Quick Test (10 questions)</button>
+            <button onClick={() => startQuiz(25)} className="w-full py-4 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-blue-500/30 transition-all">📝 Standard Test (25 questions)</button>
+            <button onClick={() => startQuiz(50)} className="w-full py-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-purple-500/30 transition-all">💪 Extended Test (50 questions)</button>
+            <button onClick={() => startQuiz(questions.length)} className="w-full py-4 bg-gradient-to-r from-orange-500 to-red-600 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-orange-500/30 transition-all">🏆 Full Test ({questions.length} questions)</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (mode === 'results') {
+    const { grade, color, emoji } = getGrade();
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-cyan-900 via-blue-900 to-indigo-900 text-white p-4">
+        <div className="max-w-2xl mx-auto pt-8">
+          <div className="text-center mb-8">
+            <div className="text-8xl mb-4">{emoji}</div>
+            <h1 className="text-4xl font-bold mb-2">Test Results</h1>
+            <p className={`text-3xl font-bold ${color}`}>{grade}</p>
+          </div>
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-6">
+            <div className="grid grid-cols-3 gap-4 text-center">
+              <div><div className="text-4xl font-bold text-green-400">{getScore()}</div><div className="text-gray-400">Correct</div></div>
+              <div><div className="text-4xl font-bold text-red-400">{quizQuestions.length - getScore()}</div><div className="text-gray-400">Wrong</div></div>
+              <div><div className="text-4xl font-bold text-blue-400">{getPercentage()}%</div><div className="text-gray-400">Score</div></div>
+            </div>
+          </div>
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-6">
+            <h2 className="text-xl font-bold mb-4">Your Answers:</h2>
+            <div className="space-y-3 max-h-96 overflow-y-auto">
+              {answers.map((answer, idx) => {
+                const q = quizQuestions[idx];
+                return (
+                  <div key={idx} className={`p-4 rounded-xl ${answer.isCorrect ? 'bg-green-500/20 border border-green-500/50' : 'bg-red-500/20 border border-red-500/50'}`}>
+                    <div className="flex items-start gap-3">
+                      <span className="text-2xl">{answer.isCorrect ? '✅' : '❌'}</span>
+                      <div className="flex-1">
+                        <p className="font-medium text-sm mb-2">{q.question}</p>
+                        {!answer.isCorrect && (<div className="text-sm"><p className="text-red-300">Your answer: {q.options[answer.selected]}</p><p className="text-green-300">Correct: {q.options[answer.correct]}</p></div>)}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <button onClick={() => setMode('menu')} className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl font-bold text-lg hover:shadow-lg transition-all">🔄 Take Test Again</button>
+        </div>
+      </div>
+    );
+  }
+
+  const q = quizQuestions[currentQuestion];
+  const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-cyan-900 via-blue-900 to-indigo-900 text-white p-4">
+      <div className="max-w-2xl mx-auto">
+        <div className="flex items-center justify-between mb-6">
+          <button onClick={() => setMode('menu')} className="text-gray-400 hover:text-white transition-colors">← Exit</button>
+          <div className="text-center"><span className="text-lg font-bold">{currentQuestion + 1} / {quizQuestions.length}</span></div>
+          <div className="text-right"><span className="text-green-400 font-bold">{answers.filter(a => a.isCorrect).length} ✓</span></div>
+        </div>
+        <div className="h-2 bg-white/20 rounded-full mb-8 overflow-hidden"><div className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-300" style={{ width: `${progress}%` }} /></div>
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-6"><h2 className="text-xl font-medium leading-relaxed">{q.question}</h2></div>
+        <div className="space-y-3 mb-6">
+          {q.options.map((option, idx) => {
+            let bgClass = 'bg-white/10 hover:bg-white/20 border-transparent';
+            if (showAnswer) {
+              if (idx === q.correct) bgClass = 'bg-green-500/30 border-green-500';
+              else if (idx === selectedAnswer && idx !== q.correct) bgClass = 'bg-red-500/30 border-red-500';
+            } else if (selectedAnswer === idx) {
+              bgClass = 'bg-blue-500/30 border-blue-500';
+            }
+            return (<button key={idx} onClick={() => handleAnswer(idx)} disabled={showAnswer} className={`w-full p-4 rounded-xl text-left transition-all border-2 ${bgClass}`}><span className="font-medium">{String.fromCharCode(65 + idx)}.</span> {option}</button>);
+          })}
+        </div>
+        {!showAnswer ? (
+          <button onClick={confirmAnswer} disabled={selectedAnswer === null} className={`w-full py-4 rounded-xl font-bold text-lg transition-all ${selectedAnswer !== null ? 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg' : 'bg-gray-600 cursor-not-allowed opacity-50'}`}>Confirm Answer</button>
+        ) : (
+          <button onClick={nextQuestion} className="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl font-bold text-lg hover:shadow-lg transition-all">{currentQuestion < quizQuestions.length - 1 ? 'Next Question →' : 'View Results'}</button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
