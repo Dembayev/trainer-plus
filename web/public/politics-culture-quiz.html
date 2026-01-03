@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Политология и Культура</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>* { box-sizing: border-box; } body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const questions = [
+  { id: 1, question: "Бескорыстная забота о других людях называется:", options: ["Эгоизм", "Альтруизм", "Прагматизм", "Индивидуализм"], correct: 1 },
+  { id: 2, question: "При какой системе выборов голосуют за политические партии?", options: ["Мажоритарной", "Пропорциональной", "Авторитарной", "Федеративной"], correct: 1 },
+  { id: 3, question: "Основоположник медицины Древнего Востока:", options: ["Гиппократ", "Авиценна (Ибн Сина)", "Аристотель", "Платон"], correct: 1 },
+  { id: 4, question: "Концепцию «золотой середины» выдвинул:", options: ["Платон", "Аристотель", "Сократ", "Демокрит"], correct: 1 },
+  { id: 5, question: "Феномен тоталитаризма впервые теоретически обосновал:", options: ["Платон", "Сталин", "Гитлер", "Макиавелли"], correct: 2 },
+  { id: 6, question: "Многообразие политических сил и идеологий называется:", options: ["Монополизм", "Политический плюрализм", "Авторитаризм", "Централизм"], correct: 1 },
+  { id: 7, question: "Госпрограмма «Культурное наследие» в Казахстане реализуется с:", options: ["1991 г.", "2004 г.", "2010 г.", "2015 г."], correct: 1 },
+  { id: 8, question: "Термин «коммунизм» с латинского означает:", options: ["Власть", "Общий, совместный", "Борьба", "Государство"], correct: 1 },
+  { id: 9, question: "Государство, подчинённое праву и защищающее права граждан:", options: ["Тоталитарное", "Правовое государство", "Авторитарное", "Теократическое"], correct: 1 },
+  { id: 10, question: "Форма древних верований, означающая «оживление природы»:", options: ["Тотемизм", "Анимизм", "Магия", "Фетишизм"], correct: 1 },
+  { id: 11, question: "Направление, перешедшее от революционной борьбы к реформам:", options: ["Коммунизм", "Социал-демократия", "Анархизм", "Фашизм"], correct: 1 },
+  { id: 12, question: "В казахской культуре луна символизирует:", options: ["Власть", "Красоту и чистоту", "Войну", "Богатство"], correct: 1 },
+  { id: 13, question: "Форма правления, где власть принадлежит духовным лидерам:", options: ["Монархия", "Теократия", "Республика", "Демократия"], correct: 1 },
+  { id: 14, question: "В арабо-мусульманской культуре философия считалась:", options: ["Наукой о природе", "Служанкой богословия", "Политической теорией", "Искусством"], correct: 1 },
+  { id: 15, question: "Теорию трёх типов легитимности власти разработал:", options: ["Маркс", "Макс Вебер", "Руссо", "Гоббс"], correct: 1 },
+  { id: 16, question: "Классическая родина прямой демократии:", options: ["Рим", "Афины (Древняя Греция)", "Египет", "Вавилон"], correct: 1 },
+  { id: 17, question: "Право граждан участвовать в голосовании:", options: ["Пассивное избирательное право", "Активное избирательное право", "Конституционное право", "Гражданская обязанность"], correct: 1 },
+  { id: 18, question: "Идеология, основанная на диктатуре пролетариата:", options: ["Либерализм", "Коммунизм", "Консерватизм", "Национализм"], correct: 1 },
+  { id: 19, question: "Автор, считавший цивилизацию гибелью культуры:", options: ["Ортега-и-Гассет", "Освальд Шпенглер", "Кант", "Гегель"], correct: 1 },
+  { id: 20, question: "Политическая идеология либерализма выступает за:", options: ["Усиление государства", "Свободу личности и права человека", "Диктатуру", "Коллективизм"], correct: 1 },
+  { id: 21, question: "Способность навязывать свою волю другим называется:", options: ["Авторитет", "Власть", "Управление", "Лидерство"], correct: 1 },
+  { id: 22, question: "Основоположник политической науки:", options: ["Аристотель", "Никколо Макиавелли", "Платон", "Руссо"], correct: 1 },
+  { id: 23, question: "Господствующая культура — это:", options: ["Массовая культура", "Культура доминирующего общества", "Контркультура", "Субкультура"], correct: 1 },
+  { id: 24, question: "Культуру «массового человека» описывал:", options: ["Шпенглер", "Хосе Ортега-и-Гассет", "Вебер", "Маркс"], correct: 1 },
+  { id: 25, question: "Идеология, основанная на расовом превосходстве:", options: ["Экстремизм", "Фашизм", "Либерализм", "Социализм"], correct: 1 },
+  { id: 26, question: "Государство, где религия отделена от политики:", options: ["Теократическое", "Светское", "Авторитарное", "Традиционное"], correct: 1 },
+  { id: 27, question: "Переходный политический режим — это:", options: ["Демократический", "Между авторитаризмом и демократией", "Тоталитарный", "Военный"], correct: 1 },
+  { id: 28, question: "Политические идеологии возникли в эпоху:", options: ["Средневековья", "Нового времени", "Античности", "Первобытности"], correct: 1 },
+  { id: 29, question: "Гуманистическая функция направлена на:", options: ["Контроль", "Воспитание любви к человеку", "Управление", "Экономику"], correct: 1 },
+  { id: 30, question: "Партии, основанные на религиозных ценностях:", options: ["Коммунистические", "Религиозные", "Либеральные", "Авангардные"], correct: 1 },
+  { id: 31, question: "Форма правления с наследственной властью:", options: ["Республика", "Монархия", "Федерация", "Диктатура"], correct: 1 },
+  { id: 32, question: "Человек как «существо политическое» — это идея:", options: ["Платона", "Аристотеля", "Сократа", "Демокрита"], correct: 1 },
+  { id: 33, question: "Социологический метод в политологии изучает:", options: ["Законы", "Влияние общества на политику", "Форму государства", "Идеологию"], correct: 1 },
+  { id: 34, question: "Плебисцит — это:", options: ["Решение власти", "Голосование народа", "Суд", "Партийное собрание"], correct: 1 },
+  { id: 35, question: "Активное избирательное право — это:", options: ["Быть избранным", "Право голосовать", "Создавать партии", "Быть депутатом"], correct: 1 },
+  { id: 36, question: "Массовая культура ориентирована на:", options: ["Элиты", "Широкие массы", "Учёных", "Политиков"], correct: 1 },
+  { id: 37, question: "Диктатура — это власть:", options: ["Народа", "Одного лидера", "Парламента", "Судов"], correct: 1 },
+  { id: 38, question: "Термин «международные отношения» ввёл:", options: ["Вебер", "Ганс Моргентау", "Маркс", "Руссо"], correct: 1 },
+  { id: 39, question: "Федеративное государство — это:", options: ["Централизованное", "С разделением власти между центром и регионами", "Абсолютное", "Теократическое"], correct: 1 },
+  { id: 40, question: "Тоталитарный режим характеризуется:", options: ["Свободой СМИ", "Полным контролем государства", "Многопартийностью", "Выборами"], correct: 1 },
+  { id: 41, question: "Политическая партия — это:", options: ["Клуб", "Организация борьбы за власть", "Профсоюз", "Движение"], correct: 1 },
+  { id: 42, question: "Основная функция партий:", options: ["Экономика", "Борьба за власть", "Культура", "Воспитание"], correct: 1 },
+  { id: 43, question: "Харизматический лидер опирается на:", options: ["Закон", "Личные качества", "Традиции", "Партию"], correct: 1 },
+  { id: 44, question: "Традиционная легитимность основана на:", options: ["Харизме", "Обычаях и традициях", "Законе", "Выборах"], correct: 1 },
+  { id: 45, question: "Теорию разделения властей разработал:", options: ["Локк", "Монтескьё", "Руссо", "Гоббс"], correct: 1 },
+  { id: 46, question: "Законодательная власть принадлежит:", options: ["Правительству", "Парламенту", "Суду", "Президенту"], correct: 1 },
+  { id: 47, question: "Исполнительная власть — это:", options: ["Парламент", "Правительство", "Суд", "Конституционный совет"], correct: 1 },
+  { id: 48, question: "Судебная власть отвечает за:", options: ["Законы", "Правосудие", "Управление", "Политику"], correct: 1 },
+  { id: 49, question: "Представительная демократия — это:", options: ["Прямая", "Через избранных представителей", "Авторитарная", "Военная"], correct: 1 },
+  { id: 50, question: "Прямая демократия — это:", options: ["Назначение", "Непосредственное участие граждан", "Делегирование", "Контроль элит"], correct: 1 },
+  { id: 51, question: "Авторитарный режим допускает:", options: ["Полный контроль", "Ограниченную оппозицию", "Свободу СМИ", "Анархию"], correct: 1 },
+  { id: 52, question: "Республика — это форма правления, где власть:", options: ["Передаётся по наследству", "Избирается", "Принадлежит духовенству", "Абсолютна"], correct: 1 },
+  { id: 53, question: "Суверенитет государства — это:", options: ["Экономика", "Независимость власти", "Армия", "Федерализм"], correct: 1 },
+  { id: 54, question: "Политическая элита — это:", options: ["Всё население", "Группа, принимающая решения", "Оппозиция", "Средний класс"], correct: 1 },
+  { id: 55, question: "Политическая социализация — это:", options: ["Экономика", "Формирование политических взглядов", "Профессия", "Помощь"], correct: 1 },
+  { id: 56, question: "Геополитика изучает:", options: ["Культуру", "Влияние географии на политику", "Право", "Экономику"], correct: 1 },
+  { id: 57, question: "Политический конфликт — это:", options: ["Сотрудничество", "Столкновение интересов", "Диалог", "Компромисс"], correct: 1 },
+  { id: 58, question: "Главная цель государства:", options: ["Прибыль", "Порядок и безопасность", "Контроль СМИ", "Экспансия"], correct: 1 }
+];
+
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+function shuffleOptions(q) {
+  const correctAnswer = q.options[q.correct];
+  const shuffledOptions = shuffleArray([...q.options]);
+  const newCorrect = shuffledOptions.indexOf(correctAnswer);
+  return { ...q, options: shuffledOptions, correct: newCorrect };
+}
+
+function App() {
+  const [mode, setMode] = React.useState('menu');
+  const [currentQuestion, setCurrentQuestion] = React.useState(0);
+  const [selectedAnswer, setSelectedAnswer] = React.useState(null);
+  const [answers, setAnswers] = React.useState([]);
+  const [showAnswer, setShowAnswer] = React.useState(false);
+  const [quizQuestions, setQuizQuestions] = React.useState([]);
+
+  const startQuiz = (count) => {
+    const shuffled = shuffleArray(questions).slice(0, count).map(shuffleOptions);
+    setQuizQuestions(shuffled);
+    setCurrentQuestion(0);
+    setAnswers([]);
+    setSelectedAnswer(null);
+    setShowAnswer(false);
+    setMode('quiz');
+  };
+
+  const handleAnswer = (index) => {
+    if (showAnswer) return;
+    setSelectedAnswer(index);
+  };
+
+  const confirmAnswer = () => {
+    if (selectedAnswer === null) return;
+    setShowAnswer(true);
+    setAnswers([...answers, {
+      questionId: quizQuestions[currentQuestion].id,
+      selected: selectedAnswer,
+      correct: quizQuestions[currentQuestion].correct,
+      isCorrect: selectedAnswer === quizQuestions[currentQuestion].correct
+    }]);
+  };
+
+  const nextQuestion = () => {
+    if (currentQuestion < quizQuestions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+      setSelectedAnswer(null);
+      setShowAnswer(false);
+    } else {
+      setMode('results');
+    }
+  };
+
+  const getScore = () => answers.filter(a => a.isCorrect).length;
+  const getPercentage = () => Math.round((getScore() / quizQuestions.length) * 100);
+
+  const getGrade = () => {
+    const pct = getPercentage();
+    if (pct >= 90) return { grade: 'Отлично', color: 'text-green-400', emoji: '🏆' };
+    if (pct >= 75) return { grade: 'Хорошо', color: 'text-blue-400', emoji: '👍' };
+    if (pct >= 60) return { grade: 'Удовлетворительно', color: 'text-yellow-400', emoji: '📚' };
+    return { grade: 'Неудовлетворительно', color: 'text-red-400', emoji: '📖' };
+  };
+
+  if (mode === 'menu') {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-red-900 via-purple-900 to-indigo-900 text-white flex items-center justify-center p-4">
+        <div className="max-w-lg w-full">
+          <div className="text-center mb-8">
+            <div className="text-6xl mb-4">🏛️</div>
+            <h1 className="text-3xl font-bold mb-2">Политология и Культура</h1>
+            <p className="text-gray-300">Саясат және мәдениет</p>
+            <p className="text-sm text-gray-400 mt-2">{questions.length} вопросов в базе</p>
+          </div>
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 space-y-3">
+            <h2 className="text-xl font-semibold text-center mb-4">Выберите количество вопросов:</h2>
+            <button onClick={() => startQuiz(10)} className="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-green-500/30 transition-all">🚀 Быстрый тест (10 вопросов)</button>
+            <button onClick={() => startQuiz(20)} className="w-full py-4 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-blue-500/30 transition-all">📝 Стандартный тест (20 вопросов)</button>
+            <button onClick={() => startQuiz(30)} className="w-full py-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-purple-500/30 transition-all">💪 Расширенный тест (30 вопросов)</button>
+            <button onClick={() => startQuiz(questions.length)} className="w-full py-4 bg-gradient-to-r from-orange-500 to-red-600 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-orange-500/30 transition-all">🏆 Полный тест ({questions.length} вопросов)</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (mode === 'results') {
+    const { grade, color, emoji } = getGrade();
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-red-900 via-purple-900 to-indigo-900 text-white p-4">
+        <div className="max-w-2xl mx-auto pt-8">
+          <div className="text-center mb-8">
+            <div className="text-8xl mb-4">{emoji}</div>
+            <h1 className="text-4xl font-bold mb-2">Результаты теста</h1>
+            <p className={`text-3xl font-bold ${color}`}>{grade}</p>
+          </div>
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-6">
+            <div className="grid grid-cols-3 gap-4 text-center">
+              <div><div className="text-4xl font-bold text-green-400">{getScore()}</div><div className="text-gray-400">Правильно</div></div>
+              <div><div className="text-4xl font-bold text-red-400">{quizQuestions.length - getScore()}</div><div className="text-gray-400">Ошибок</div></div>
+              <div><div className="text-4xl font-bold text-blue-400">{getPercentage()}%</div><div className="text-gray-400">Результат</div></div>
+            </div>
+          </div>
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-6">
+            <h2 className="text-xl font-bold mb-4">Ваши ответы:</h2>
+            <div className="space-y-3 max-h-96 overflow-y-auto">
+              {answers.map((answer, idx) => {
+                const q = quizQuestions[idx];
+                return (
+                  <div key={idx} className={`p-4 rounded-xl ${answer.isCorrect ? 'bg-green-500/20 border border-green-500/50' : 'bg-red-500/20 border border-red-500/50'}`}>
+                    <div className="flex items-start gap-3">
+                      <span className="text-2xl">{answer.isCorrect ? '✅' : '❌'}</span>
+                      <div className="flex-1">
+                        <p className="font-medium text-sm mb-2">{q.question}</p>
+                        {!answer.isCorrect && (<div className="text-sm"><p className="text-red-300">Ваш ответ: {q.options[answer.selected]}</p><p className="text-green-300">Правильный: {q.options[answer.correct]}</p></div>)}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <button onClick={() => setMode('menu')} className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl font-bold text-lg hover:shadow-lg transition-all">🔄 Пройти тест снова</button>
+        </div>
+      </div>
+    );
+  }
+
+  const q = quizQuestions[currentQuestion];
+  const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-red-900 via-purple-900 to-indigo-900 text-white p-4">
+      <div className="max-w-2xl mx-auto">
+        <div className="flex items-center justify-between mb-6">
+          <button onClick={() => setMode('menu')} className="text-gray-400 hover:text-white transition-colors">← Выход</button>
+          <div className="text-center"><span className="text-lg font-bold">{currentQuestion + 1} / {quizQuestions.length}</span></div>
+          <div className="text-right"><span className="text-green-400 font-bold">{answers.filter(a => a.isCorrect).length} ✓</span></div>
+        </div>
+        <div className="h-2 bg-white/20 rounded-full mb-8 overflow-hidden"><div className="h-full bg-gradient-to-r from-red-500 to-purple-500 transition-all duration-300" style={{ width: `${progress}%` }} /></div>
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-6"><h2 className="text-xl font-medium leading-relaxed">{q.question}</h2></div>
+        <div className="space-y-3 mb-6">
+          {q.options.map((option, idx) => {
+            let bgClass = 'bg-white/10 hover:bg-white/20 border-transparent';
+            if (showAnswer) {
+              if (idx === q.correct) bgClass = 'bg-green-500/30 border-green-500';
+              else if (idx === selectedAnswer && idx !== q.correct) bgClass = 'bg-red-500/30 border-red-500';
+            } else if (selectedAnswer === idx) {
+              bgClass = 'bg-blue-500/30 border-blue-500';
+            }
+            return (<button key={idx} onClick={() => handleAnswer(idx)} disabled={showAnswer} className={`w-full p-4 rounded-xl text-left transition-all border-2 ${bgClass}`}><span className="font-medium">{String.fromCharCode(65 + idx)}.</span> {option}</button>);
+          })}
+        </div>
+        {!showAnswer ? (
+          <button onClick={confirmAnswer} disabled={selectedAnswer === null} className={`w-full py-4 rounded-xl font-bold text-lg transition-all ${selectedAnswer !== null ? 'bg-gradient-to-r from-red-500 to-purple-600 hover:shadow-lg' : 'bg-gray-600 cursor-not-allowed opacity-50'}`}>Подтвердить ответ</button>
+        ) : (
+          <button onClick={nextQuestion} className="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl font-bold text-lg hover:shadow-lg transition-all">{currentQuestion < quizQuestions.length - 1 ? 'Следующий вопрос →' : 'Посмотреть результаты'}</button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
